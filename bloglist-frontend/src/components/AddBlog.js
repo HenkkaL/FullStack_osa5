@@ -4,31 +4,37 @@ import React from 'react'
 
 
 
-const AddBlog = (props) => {
+const AddBlog = ({ addBlog, title, author, url, handleBlogChange }) => {
   return (
     <div>
       <h2>Lisää uusi blogi</h2>
 
-      <form onSubmit={props.addBlog}>
-        <label>Nimi</label>
-        <input
-          name="title"
-          value={props.title}
-          onChange={props.handleBlogChange}
-        />
-        <label>Kirjoittaja</label>
-        <input
-          name="author"
-          value={props.author}
-          onChange={props.handleBlogChange}
-        />
-        <label>Url</label>
-        <input
-          name="url"
-          value={props.url}
-          onChange={props.handleBlogChange}
-        />
-        <button>tallenna</button>
+      <form onSubmit={addBlog}>
+        <div>
+          <label>Nimi</label>
+          <input
+            name="title"
+            value={title}
+            onChange={handleBlogChange}
+          />
+        </div>
+        <div>
+          <label>Kirjoittaja</label>
+          <input
+            name="author"
+            value={author}
+            onChange={handleBlogChange}
+          />
+        </div>
+        <div>
+          <label>Url</label>
+          <input
+            name="url"
+            value={url}
+            onChange={handleBlogChange}
+          />
+          <button>tallenna</button>
+        </div>
       </form>
     </div>
   )

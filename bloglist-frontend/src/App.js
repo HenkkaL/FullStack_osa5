@@ -1,6 +1,7 @@
 import React from 'react'
 import Blog from './components/Blog'
 import AddBlog from './components/AddBlog'
+import Togglable from './components/Togglable'
 import Notification from './components/Notification'
 import blogService from './services/blogs'
 import loginService from './services/login'
@@ -22,7 +23,7 @@ class App extends React.Component {
   }
 
   componentDidMount() {
-    blogService.getAll().then(blogs =>
+    blogService.getAll().then(blogs =>      
       this.setState({ blogs })
     )
 
@@ -127,12 +128,14 @@ class App extends React.Component {
         <h2>blogs</h2>        
         <button onClick={this.logout}>logout</button>
         <p>{this.state.user.name} logged in</p>
-        <AddBlog 
-          addBlog={this.addBlog}
-          handleBlogChange={this.handleBlogChange}
-          title={this.state.title}
-          author={this.state.author}
-          url={this.state.url} />
+        <Togglable buttonLabel="new blog" ref={component => this.allBlogs = component}>
+          <AddBlog
+            addBlog={this.addBlog}
+            handleBlogChange={this.handleBlogChange}
+            title={this.state.title}
+            author={this.state.author}
+            url={this.state.url} />
+        </Togglable>
         {this.state.blogs.map(blog =>
           <Blog key={blog._id} blog={blog} />
         )}
@@ -141,6 +144,7 @@ class App extends React.Component {
 
     return (
       <div>
+        {console.log(this.state.blogs)}
         <Notification errorType={this.state.errorType} message={this.state.error} />
         {this.state.user === null ? loginForm() : allBlogs() }
       </div>
