@@ -70,7 +70,6 @@ class App extends React.Component {
 
   addBlog = (event) => {
     event.preventDefault()
-    console.log("testi")
     const blogObject = {
       title: this.state.title,
       author: this.state.author,
@@ -92,6 +91,38 @@ class App extends React.Component {
           this.setState({ error: null, errorType: null })
         }, 5000)
       })
+  }
+
+  addLike = (id) => {
+    return () => {
+      const blog = this.state.blogs.find(b => b._id === id)
+      console.log(blog)
+      const likes =  blog.likes + 1
+      const changedBlog = { ...blog, likes: likes }
+
+      blogService
+        .update(id, changedBlog)
+        .then(updatedBlog => {
+          this.setState({
+            blogs: this.state.blogs.map(blog => blog._id !== id ? blog : changedBlog)
+          })
+        })
+    }
+  }
+
+  deleteBlog = (id) => {
+    return () => {
+      if (window.confirm("haluatko poistaa numeron"))
+      blogService
+      .deleteBlog(id)
+      .then(responce => {
+        if (responce.status === 204) {
+          this.setState({
+            blogs: this.state.blogs.filter(blog => blog._id !== id)
+          })
+        }
+      })
+    }
   }
 
   render() {
@@ -136,15 +167,27 @@ class App extends React.Component {
             author={this.state.author}
             url={this.state.url} />
         </Togglable>
-        {this.state.blogs.map(blog =>
-          <Blog key={blog._id} blog={blog} />
+        {this.state.blogs.sort(function (a, b) {
+            if (a.likes < b.likes) {
+              return 1;
+            }
+            if (a.likes > b.likes) {
+              return -1;
+            }
+            return 0;
+        }).map(blog =>
+          <Blog key={blog._id}
+           blog={blog}
+           addLike={this.addLike(blog._id)}
+           user={this.state.user.username}
+           deleteBlog={this.deleteBlog(blog._id)}
+           />
         )}
       </div>
     )
 
     return (
       <div>
-        {console.log(this.state.blogs)}
         <Notification errorType={this.state.errorType} message={this.state.error} />
         {this.state.user === null ? loginForm() : allBlogs() }
       </div>
