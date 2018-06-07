@@ -168,20 +168,21 @@ class App extends React.Component {
             url={this.state.url} />
         </Togglable>
         {this.state.blogs.sort(function (a, b) {
-            if (a.likes < b.likes) {
-              return 1;
-            }
-            if (a.likes > b.likes) {
-              return -1;
-            }
-            return 0;
+          if (a.likes < b.likes) {
+            return 1;
+          }
+          if (a.likes > b.likes) {
+            return -1;
+          }
+          return 0;
         }).map(blog =>
-          <Blog key={blog._id}
-           blog={blog}
-           addLike={this.addLike(blog._id)}
-           user={this.state.user.username}
-           deleteBlog={this.deleteBlog(blog._id)}
-           />
+          <Blog 
+            key={blog._id}
+            blog={blog}
+            addLike={this.addLike(blog._id)}
+            user={this.state.user.username}
+            deleteBlog={this.deleteBlog(blog._id)}
+          />
         )}
       </div>
     )

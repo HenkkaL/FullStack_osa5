@@ -40,10 +40,10 @@ class Blog extends React.Component {
 
     return (
       <div style={blogStyle}>
-        <div onClick={this.toggleCollapse}>
+        <div className="headerDiv" onClick={this.toggleCollapse}>
           <h4>{this.props.blog.author}</h4>
         </div>
-        <div style={collapseDiv}>
+        <div className="detailDiv" style={collapseDiv}>
         <h4>{this.props.blog.title}</h4>
           <a href={this.props.blog.url}>{this.props.blog.url}</a>
           <p>{this.props.blog.author}</p>
