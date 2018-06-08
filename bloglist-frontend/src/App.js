@@ -26,8 +26,8 @@ class App extends React.Component {
     blogService.getAll().then(blogs =>      
       this.setState({ blogs })
     )
-
-    const loggedUserJSON = window.localStorage.getItem('loggedUser')
+    console.log(window.localStorage.getItem('loggeInUser'))
+    const loggedUserJSON = window.localStorage.getItem('loggedInUser')    
     if (loggedUserJSON) {
       const user = JSON.parse(loggedUserJSON)
       this.setState({user})
@@ -50,7 +50,7 @@ class App extends React.Component {
         username: this.state.username,
         password: this.state.password
       })
-      window.localStorage.setItem('loggedUser', JSON.stringify(user))
+      window.localStorage.setItem('loggedInUser', JSON.stringify(user))
       this.setState({ username: '', password: '', user})
     } catch(exception) {
       this.setState({
