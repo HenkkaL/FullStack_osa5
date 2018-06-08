@@ -12,15 +12,16 @@ class App extends React.Component {
     })
   }
 
-  create = (id) => () => {
-    const input = this.refs.anecdote.value
+  addAnecdote = (event) => {
+    event.preventDefault()
+    const content = event.target.anecdote.value
     this.store.dispatch({
       type: 'ADD',
       data: {
-        input: input
+        content: content
       }
     })
-    this.refs.anecdote.value = ''
+    event.target.anecdote.value = ''
   }
 
   render() {
@@ -40,9 +41,9 @@ class App extends React.Component {
           </div>
         )}
         <h2>create new</h2>
-        <form>
-          <div><input ref="anecdote"/></div>
-          <button type="button" onClick={this.create()}>create</button> 
+        <form onSubmit={this.addAnecdote}>
+          <div><input name="anecdote"/></div>
+          <button type="submit">create</button> 
         </form>
       </div>
     )

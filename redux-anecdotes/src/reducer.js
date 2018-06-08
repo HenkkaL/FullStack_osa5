@@ -37,8 +37,8 @@ const reducer = (state = initialState, action) => {
   
   switch (action.type) {
     case 'ADD': {       
-      const input = action.data.input
-      const newAnecdote = asObject(input)
+      const content = action.data.content
+      const newAnecdote = asObject(content)
       return state.concat(newAnecdote)
     }
     case 'LIKE': {       
