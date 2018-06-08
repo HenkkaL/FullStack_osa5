@@ -28,11 +28,9 @@ describe('<Blog />', () => {
     it('after clicking the button,details are displayed', () => {
         const headerDiv = blogComponent.find('.headerDiv')
         headerDiv.simulate('click')
-        console.log(headerDiv.debug())
         
         const detailsDiv = blogComponent.find('.detailDiv')
         expect(detailsDiv.getElement().props.style).toEqual({ display: '' })
-        console.log(detailsDiv.debug())
     })
 
 })

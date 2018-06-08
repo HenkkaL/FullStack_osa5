@@ -26,19 +26,15 @@ describe('<App />', () => {
         token: '1231231214',
         name: 'Teuvo Testaaja'
       } 
-      beforeEach(() => {        
-        
-        app = mount(<App />) 
-        localStorage.setItem('loggedInUser', JSON.stringify(user))
-  
-        
+      beforeEach(() => {             
+        app = mount(<App />)         
       })
   
       it('all notes are rendered', () => {
-
+        window.localStorage.setItem('loggedInUser', JSON.stringify(user))
         console.log(window.localStorage.getItem('loggedInUser'))
         app.update()
-        console.log(app.html())
+        
         const blogComponents = app.find(Blog)
         expect(blogComponents.length).toEqual(blogService.blogs.length)
       })

@@ -6,6 +6,7 @@ const blogs = [
     author: "eka kirjailija",
     title: "HTML on helppoa",
     url: "www.urli1",
+    likes: 2,
     user: {
       _id: "5a437a9e514ab7f168ddf138",
       username: "mluukkai",
@@ -17,6 +18,7 @@ const blogs = [
     author: "toka kirjailija",
     title: "Selain pystyy suorittamaan vain javascriptiä",
     url: "www.tokaurli",
+    likes: 3,
     user: {
       _id: "5a437a9e514ab7f168ddf138",
       username: "mluukkai",
@@ -28,7 +30,7 @@ const blogs = [
     author: "eka kirjailija",
     title: "HTTP-protokollan tärkeimmät metodit ovat GET ja POST",
     url: "www.kolmasurli",
-    important: true,
+    likes: 3,
     user: {
       _id: "5a437a9e514ab7f168ddf138",
       username: "mluukkai",

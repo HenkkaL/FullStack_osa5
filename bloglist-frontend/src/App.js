@@ -23,10 +23,11 @@ class App extends React.Component {
   }
 
   componentDidMount() {
+    console.log(window.localStorage.getItem('loggedInUser'))
     blogService.getAll().then(blogs =>      
       this.setState({ blogs })
     )
-    console.log(window.localStorage.getItem('loggeInUser'))
+    
     const loggedUserJSON = window.localStorage.getItem('loggedInUser')    
     if (loggedUserJSON) {
       const user = JSON.parse(loggedUserJSON)
@@ -96,7 +97,6 @@ class App extends React.Component {
   addLike = (id) => {
     return () => {
       const blog = this.state.blogs.find(b => b._id === id)
-      console.log(blog)
       const likes =  blog.likes + 1
       const changedBlog = { ...blog, likes: likes }
 
